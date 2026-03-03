@@ -25,9 +25,13 @@ OUTPUT_FILE="dist/pdf/${filename}.pdf"
 
 echo "単独PDF出力処理を開始します: $INPUT_FILE -> $OUTPUT_FILE"
 
+# スクリプトの場所を基準とした絶対パスでデザインを指定
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+THEME_PATH="$SCRIPT_DIR/styles/style.css"
+
 # vivliostyle CLI を使って単一のMarkdownをPDFに変換
 npx vivliostyle build "$INPUT_FILE" \
-  --theme ./styles/style.css \
+  --theme "$THEME_PATH" \
   --output "$OUTPUT_FILE"
 
 echo "完了しました！ PDFを確認してください: $OUTPUT_FILE"

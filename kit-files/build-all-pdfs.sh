@@ -19,10 +19,14 @@ find pck-articles -name "*.md" | while read -r file; do
     
     echo "処理中: $file -> dist/pdf/${filename}.pdf"
     
+    # スクリプトの場所を基準とした絶対パスでデザインを指定
+    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+    THEME_PATH="$SCRIPT_DIR/styles/style.css"
+
     # vivliostyle CLI を使って単一のMarkdownをPDFに変換
     # --theme オプションでプロジェクトのスタイルを適用
     npx vivliostyle build "$file" \
-      --theme ./styles/style.css \
+      --theme "$THEME_PATH" \
       --output "dist/pdf/${filename}.pdf"
 done
 
