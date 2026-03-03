@@ -1,0 +1,270 @@
+@page {
+    size: A4;
+    margin: 20mm 20mm;
+
+    @top-right {
+        content: string(doc-header-text);
+        font-size: 8pt;
+        font-family: "Hiragino Sans", "Meiryo", sans-serif;
+        color: #666;
+    }
+
+    @bottom-center {
+        content: counter(page);
+        font-size: 8pt;
+        font-family: sans-serif;
+        color: #666;
+    }
+}
+
+/* =========================================
+   変数定義 (テーマカラーなど)
+   ========================================= */
+:root {
+    --highlight-bg: #ffe4d0;
+    /* 本文の強調（マーカー背景色） */
+    --accent-color: #ff7f50;
+    /* テーマカラー（オレンジ系） */
+    --border-color: #555;
+    /* 汎用ボーダー色 */
+    --code-accent: #ff7f50;
+    /* インラインコード用アクセントカラー（赤） */
+}
+
+/* =========================================
+   基本のフォント設定（明朝体ベース）
+   ========================================= */
+body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "MS Mincho", serif;
+    line-height: 1.9;
+    color: #000;
+    font-size: 11pt;
+}
+
+/* =========================================
+   ドキュメントタイトル・サブタイトル
+   ========================================= */
+.doc-title {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "MS Mincho", serif;
+    font-size: 28pt;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 1em;
+    margin-bottom: 0.2em;
+    line-height: 1.4;
+    border-bottom: 4px solid #333;
+    padding-bottom: 12px;
+    color: #333;
+}
+
+.doc-subtitle {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "MS Mincho", serif;
+    font-size: 16pt;
+    text-align: left;
+    color: #666;
+    margin-bottom: 3em;
+}
+
+/* ヘッダー文字列（PDFには直接表示せず、ページヘッダーに送る） */
+.doc-header {
+    string-set: doc-header-text content();
+    display: none;
+}
+
+/* =========================================
+   見出し階層 (H1〜H5)
+   ========================================= */
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "MS Mincho", serif;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+h1 {
+    font-size: 24pt;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    break-before: page;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 5px;
+    color: #111;
+}
+
+/* 最初のH1、またはタイトルの直後のH1は改ページしない */
+h1:first-of-type,
+.doc-subtitle+h1 {
+    break-before: auto;
+}
+
+h2 {
+    font-size: 18pt;
+    margin-top: 2.5em;
+    margin-bottom: 1em;
+    border-left: 6px solid var(--accent-color);
+    padding-left: 12px;
+}
+
+h3 {
+    font-size: 14pt;
+    margin-top: 2em;
+    margin-bottom: 0.8em;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+}
+
+h4 {
+    font-size: 12pt;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+h5 {
+    font-size: 11pt;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+/* =========================================
+   本文・インライン要素の装飾
+   ========================================= */
+
+/* 重要なキーワード（太字）: マーカー背景色 */
+strong {
+    background-color: var(--highlight-bg);
+    padding: 0 4px;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+/* リストのマーカー色 */
+ul li::marker,
+ol li::marker {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* =========================================
+   ブロック要素 (引用・コード・リスト・表など)
+   ========================================= */
+
+/* コードブロック (複数行) */
+pre {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-family: "Menlo", "Monaco", "Consolas", "Hiragino Sans", monospace;
+    font-size: 9.5pt;
+    overflow-x: auto;
+    break-inside: avoid;
+    line-height: 1.5;
+    margin: 1.5em 0;
+}
+
+pre code {
+    color: inherit;
+    background-color: transparent;
+    padding: 0;
+}
+
+/* インラインコード (単発) */
+code {
+    font-family: "Menlo", "Monaco", "Consolas", "Hiragino Sans", monospace;
+    font-size: 0.95em;
+    background-color: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin: 0 2px;
+    color: var(--code-accent);
+}
+
+/* 引用 */
+blockquote {
+    margin: 1.5em 0;
+    padding: 10px 15px;
+    border-left: 4px solid #ccc;
+    color: #555;
+    background-color: #fafafa;
+    break-inside: avoid;
+}
+
+blockquote p {
+    margin: 0;
+}
+
+ul,
+ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    break-inside: avoid;
+}
+
+th,
+td {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 2em auto;
+    break-inside: avoid;
+}
+
+/* =========================================
+   特殊ブロック (コラムなど)
+   ========================================= */
+.column-box {
+    border: 2px solid var(--accent-color);
+    padding: 15px 20px 10px 20px;
+    /* 上・右・下・左 の順で個別に設定可能 */
+    border-radius: 8px;
+    background-color: #fffaf5;
+    margin: 2em 0;
+    break-inside: avoid;
+    font-family: "Hiragino Sans", "Meiryo", sans-serif;
+    color: #333;
+}
+
+/* コラム内の見出し（原稿側で <div class="column-title"> として記述） */
+.column-title {
+    display: block;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    border-bottom: 1px dashed var(--accent-color);
+    padding-bottom: 5px;
+}
+
+/* =========================================
+   特殊操作 (改ページなど)
+   ========================================= */
+
+/* 任意の箇所で強制的に改ページする */
+.page-break {
+    break-before: page;
+}

@@ -1,0 +1,19 @@
+{
+  "name": "textbook-project",
+  "version": "1.0.0",
+  "description": "PDF Generator Kit Project",
+  "main": "index.js",
+  "scripts": {
+    "pdf": "./build-single-pdf.sh",
+    "pdf:all": "./build-all-pdfs.sh",
+    "build:all": "./build-all-pdfs.sh",
+    "build:single": "./build-single-pdf.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@vivliostyle/cli": "^10.3.1"
+  }
+}
