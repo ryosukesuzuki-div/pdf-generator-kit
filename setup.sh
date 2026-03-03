@@ -35,13 +35,24 @@ chmod +x build-single-pdf.sh build-all-pdfs.sh
 echo "ツールをダウンロードしています（しばらくお待ちください）"
 npm install
 
+# 5. キットフォルダの隠しフォルダ化
+# セットアップ完了後、このフォルダ自体を隠しフォルダにしてルートを整理します
+if [ "$(basename "$KIT_DIR")" = "pdf-generator-kit" ]; then
+    if [ ! -d "$DEST_DIR/.pdf-generator-kit" ]; then
+        echo ""
+        echo "フォルダを整理しています..."
+        mv "$KIT_DIR" "$DEST_DIR/.pdf-generator-kit"
+        echo "※ 元のキットフォルダは '.pdf-generator-kit' に移動（隠しフォルダ化）されました"
+    fi
+fi
+
 echo ""
 echo "セットアップが完了しました"
 echo "--------------------------------------------------"
 echo "今後の執筆フロー："
 echo ""
 echo "1. articles/SAMPLE.md をコピーして新しい原稿を作成します"
-echo "2. キット内の このキットの使用方法.md を参考に執筆します"
+echo "2. プロジェクトルートにある『このキットの使用方法.md』を参考に執筆します"
 echo "3. 以下のコマンドを実行して PDF に変換します"
 echo ""
 echo "   npm run pdf [ファイルのパス]"
