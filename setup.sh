@@ -14,7 +14,7 @@ cd "$DEST_DIR"
 
 # 1. 必要なディレクトリの作成
 echo "ディレクトリを作成中..."
-mkdir -p styles dist/pdf articles/images .agents/skills/pdf-generator
+mkdir -p styles dist/pdf articles/images
 
 # 2. キット内の kit-files フォルダから資材を外側（プロジェクトルート）へ展開
 echo "制作資材を展開しています..."
@@ -25,17 +25,38 @@ cp "$KIT_DIR/kit-files/build-all-pdfs.sh" ./build-all-pdfs.sh
 cp "$KIT_DIR/kit-files/vivliostyle.book.config.js" ./vivliostyle.book.config.js
 # サンプル原稿と画像フォルダを articles フォルダに展開
 cp -r "$KIT_DIR/kit-files/articles/" ./articles/
-# AIスキル定義を展開
-cp "$KIT_DIR/kit-files/.agents/skills/pdf-generator/SKILL.md" ./.agents/skills/pdf-generator/SKILL.md
 
-# 3. 実行権限の付与
+# 3. AIスキル定義（SKILL.md）の展開先を決定
+# 優先順位: .agent > .agents > .claude (いずれもなければ .agent を作成)
+SKILL_BASE_DIR=""
+if [ -d "./.agent" ]; then
+    SKILL_BASE_DIR="./.agent"
+elif [ -d "./.agents" ]; then
+    SKILL_BASE_DIR="./.agents"
+elif [ -d "./.claude" ]; then
+    SKILL_BASE_DIR="./.claude"
+else
+    SKILL_BASE_DIR="./.agent"
+    mkdir -p "$SKILL_BASE_DIR"
+fi
+
+SKILL_DEST="$SKILL_BASE_DIR/skills/pdf-generator"
+mkdir -p "$SKILL_DEST"
+
+# AIスキル定義をコピー
+cp "$KIT_DIR/kit-files/.agent/skills/pdf-generator/SKILL.md" "$SKILL_DEST/SKILL.md"
+
+# 4. 使用方法ドキュメントをルートに展開
+cp "$KIT_DIR/このキットの使用方法.md" ./このキットの使用方法.md
+
+# 5. 実行権限の付与
 chmod +x build-single-pdf.sh build-all-pdfs.sh
 
-# 4. ツールのインストール
+# 6. ツールのインストール
 echo "ツールをダウンロードしています（しばらくお待ちください）"
 npm install
 
-# 5. キットフォルダの隠しフォルダ化
+# 7. キットフォルダの隠しフォルダ化
 # セットアップ完了後、このフォルダ自体を隠しフォルダにしてルートを整理します
 if [ "$(basename "$KIT_DIR")" = "pdf-generator-kit" ]; then
     if [ ! -d "$DEST_DIR/.pdf-generator-kit" ]; then
@@ -57,4 +78,5 @@ echo "3. 以下のコマンドを実行して PDF に変換します"
 echo ""
 echo "   npm run pdf [ファイルのパス]"
 echo "--------------------------------------------------"
-echo "※ AIへの相談時は「SKILL.md（制作ルール）を教えて」と伝えてください"
+echo "[AIスキル] SKILL.md を $SKILL_BASE_DIR/skills/pdf-generator/ に配置しました"
+echo "※ AIへの相談時は「このプロジェクトの制作ルールを教えて」と伝えてください"

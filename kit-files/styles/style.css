@@ -22,7 +22,7 @@
    ========================================= */
 :root {
     --highlight-bg: #ffe4d0;
-    /* 本文の強調（マーカー背景色） */
+    /* 本文の強調（マーカー背景色） 例：#ff7f50, #c93a37 */
     --accent-color: #ff7f50;
     /* テーマカラー（オレンジ系） */
     --border-color: #555;
@@ -106,6 +106,8 @@ h2 {
     margin-bottom: 1em;
     border-left: 6px solid var(--accent-color);
     padding-left: 12px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
 }
 
 h3 {
