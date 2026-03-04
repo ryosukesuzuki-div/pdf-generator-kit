@@ -58,7 +58,7 @@ npm install
 
 # 7. キットフォルダの隠しフォルダ化
 # セットアップ完了後、このフォルダ自体を隠しフォルダにしてルートを整理します
-if [ "$(basename "$KIT_DIR")" = "pdf-generator-kit" ]; then
+if [[ "$(basename "$KIT_DIR")" == pdf-generator-kit* ]]; then
     if [ ! -d "$DEST_DIR/.pdf-generator-kit" ]; then
         echo ""
         echo "フォルダを整理しています..."
