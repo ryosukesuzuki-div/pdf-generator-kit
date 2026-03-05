@@ -64,11 +64,13 @@ npm run pdf:all my-folder
 ### ページ構成要素
 
 **ヘッダー**（ページ右上に表示）:
+
 ```html
 <div class="doc-header">セクション名やタイトル</div>
 ```
 
 **タイトル / サブタイトル**（文書冒頭に記述）:
+
 ```html
 <div class="doc-title">メインタイトル</div>
 <div class="doc-subtitle">サブタイトル</div>
@@ -79,6 +81,7 @@ npm run pdf:all my-folder
 - **H1（`#` 見出し）の直前**で自動的に改ページされます
   - **最初の H1 のみ例外**：タイトル直後に配置されるため改ページされません
 - **手動改ページ**:
+
   ```html
   <div class="page-break"></div>
   ```
@@ -87,6 +90,7 @@ npm run pdf:all my-folder
 
 - **太字** (`**テキスト**`): ブランドカラーのカラーマーカー（背景色）が自動で付きます
 - **コラム**:
+
   ```html
   <div class="column-box">
   <div class="column-title">コラムタイトル</div>
