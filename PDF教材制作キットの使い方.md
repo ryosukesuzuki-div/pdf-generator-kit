@@ -1,14 +1,14 @@
 <div class="doc-header">pdf-generator-kit</div>
-<div class="doc-title">PDF生成キットの使い方</div>
+<div class="doc-title">PDF教材制作キットの使い方</div>
 <div class="doc-subtitle">Markdownからプロ仕様のPDFを出力するキット</div>
 
-# PDF生成キットの使い方
+# PDF教材制作キットの使い方
 
 このキットをセットアップすると、Markdown原稿をプロ仕様のPDFに変換できるようになります。<br>
 以下の **1〜4 のステップ** を順に進めてください。
 
 
-## 1. PDF生成キットをセットアップする
+## 1. PDF教材制作キットをセットアップする
 
 まずは、自分のプロジェクトにこのキットを組み込みます。
 
@@ -95,7 +95,7 @@
 <div class="column-box">
 <div class="column-title">ヒント</div>
 
-慣れてきたら、いま読んでいるマニュアル自体（PDF生成キットの使い方.md）もPDFにしてみましょう。ターミナルで `npm run pdf PDF生成キットの使い方.md` を実行すると、このファイルも見やすいPDFになります。
+慣れてきたら、いま読んでいるマニュアル自体（PDF教材制作キットの使い方.md）もPDFにしてみましょう。ターミナルで `npm run pdf PDF教材制作キットの使い方.md` を実行すると、このファイルも見やすいPDFになります。
 </div>
 
 
