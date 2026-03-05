@@ -1,0 +1,19 @@
+{
+  "@context": [
+    "https://schema.org",
+    "https://www.w3.org/ns/pub-context"
+  ],
+  "type": "Book",
+  "conformsTo": "https://github.com/vivliostyle/vivliostyle-cli",
+  "name": "textbook-project",
+  "inLanguage": "ja",
+  "dateModified": "2026-03-05T02:14:30.261Z",
+  "readingOrder": [
+    {
+      "url": "articles/SAMPLE.html",
+      "name": "このファイルの使い方 (H1)"
+    }
+  ],
+  "resources": [],
+  "links": []
+}
