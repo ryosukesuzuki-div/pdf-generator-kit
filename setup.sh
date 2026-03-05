@@ -47,7 +47,7 @@ mkdir -p "$SKILL_DEST"
 cp "$KIT_DIR/kit-files/.agent/skills/pdf-generator/SKILL.md" "$SKILL_DEST/SKILL.md"
 
 # 4. 使用方法ドキュメントをルートに展開
-cp "$KIT_DIR/このキットの使用方法.md" ./このキットの使用方法.md
+cp "$KIT_DIR/PDF生成キットの使い方.md" ./PDF生成キットの使い方.md
 
 # 5. 実行権限の付与
 chmod +x build-single-pdf.sh build-all-pdfs.sh
