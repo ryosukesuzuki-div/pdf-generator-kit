@@ -67,6 +67,16 @@ if [[ "$(basename "$KIT_DIR")" == pdf-generator-kit* ]]; then
     fi
 fi
 
+# 8. 展開先のGitリポジトリを初期化（キット由来の.gitを除去して新規init）
+# クローン時に付属してくるキット開発用の.gitを削除し、ユーザーのプロジェクトとして再初期化する
+if [ -d "$DEST_DIR/.git" ]; then
+    echo ""
+    echo "Gitリポジトリを初期化しています（キット由来の履歴を除去）..."
+    rm -rf "$DEST_DIR/.git"
+    git -C "$DEST_DIR" init -q
+    echo "✔ Gitリポジトリを新規初期化しました"
+fi
+
 echo ""
 echo "セットアップが完了しました"
 echo "--------------------------------------------------"

@@ -1,9 +1,8 @@
-# macOS
-.DS_Store
+# macOS（全階層対象）
+**/.DS_Store
 
 # Node.js
 node_modules/
-package-lock.json
 
 # PDF生成の出力先（テスト時に生成されるが配布不要）
 dist/
