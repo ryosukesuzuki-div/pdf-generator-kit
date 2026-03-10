@@ -32,6 +32,28 @@ find "$TARGET_DIR" -name "*.md" | sort | while read -r file; do
 
     echo "処理中: $file -> $OUTPUT_FILE"
 
+    # PDFのタイトルを抽出
+    DEFAULT_PDF_TITLE="TEXTBOOK"
+    DOC_TITLE=$(node -e '
+    const fs = require("fs");
+    try {
+      const file = process.argv[1];
+      const content = fs.readFileSync(file, "utf-8");
+      const match = content.match(/<div class="doc-title">([\s\S]*?)<\/div>/);
+      if (match) {
+        let title = match[1].replace(/<br\s*\/?>/gi, " ");
+        title = title.replace(/<[^>]*>?/gm, "");
+        title = title.replace(/[#*`_]/g, "");
+        title = title.replace(/\r?\n/g, "").trim();
+        if (title) {
+            console.log(title);
+            process.exit(0);
+        }
+      }
+    } catch(e) {}
+    console.log(process.argv[2]);
+    ' "$file" "$DEFAULT_PDF_TITLE")
+
     # 一時的な vivliostyle config を生成してビルド
     # （entry に相対パスを使うことで styles/ の誤コピーを防ぐ）
     TEMP_CONFIG="vivliostyle.tmp.config.js"
@@ -40,6 +62,7 @@ module.exports = {
   language: 'ja',
   size: 'A4',
   theme: './styles/style.css',
+  title: '${DOC_TITLE}',
   entry: [
     '${file}'
   ],

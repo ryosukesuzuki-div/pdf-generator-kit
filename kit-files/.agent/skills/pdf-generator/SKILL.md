@@ -1,3 +1,8 @@
+---
+name: PDF教材制作キットサポート
+description: pdf-generator-kitを使用したPDF教材の執筆、コマンド実行、デザイン調整をサポートするための知識とルール。
+---
+
 # PDF教材制作キット (pdf-generator-kit) 制作ルール
 
 このファイルは、AIエージェントがこのプロジェクトで正確にユーザーをサポートするための参照マニュアルです。
@@ -19,6 +24,10 @@
 ├── articles/                    ← デフォルトの原稿フォルダ
 │   ├── SAMPLE.md                ← 「執筆マニュアル」兼「デザイン見本」兼「テンプレート」
 │   └── images/                  ← articles/ 内の画像置き場
+├── .agent/                      ← AIへの指示書やスキルが置かれるフォルダ（※環境により .agents や .claude となる場合あり）
+│   └── skills/
+│       └── pdf-generator/
+│           └── SKILL.md         ← このファイル（AIが読むルールブック）
 ├── styles/
 │   └── style.css                ← PDF全体のデザイン定義（CSSで制御）
 ├── build-single-pdf.sh          ← 1ファイルPDF化スクリプト

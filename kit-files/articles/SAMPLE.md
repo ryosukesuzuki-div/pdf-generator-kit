@@ -1,4 +1,4 @@
-<div class="doc-header">シリーズ名や教科名</div>
+<div class="doc-header">PDF教材制作キット</div>
 <div class="doc-title">執筆マニュアル<br>兼 デザイン見本・テンプレート</div>
 <div class="doc-subtitle">このファイルをコピーして最初の執筆を始めましょう！</div>
 

@@ -39,6 +39,28 @@ OUTPUT_FILE="dist/pdf/${filename}.pdf"
 
 echo "単独PDF出力処理を開始します: $INPUT_ABS -> $OUTPUT_FILE"
 
+# PDFのタイトルを抽出
+DEFAULT_PDF_TITLE="TEXTBOOK"
+DOC_TITLE=$(node -e '
+const fs = require("fs");
+try {
+  const file = process.argv[1];
+  const content = fs.readFileSync(file, "utf-8");
+  const match = content.match(/<div class="doc-title">([\s\S]*?)<\/div>/);
+  if (match) {
+    let title = match[1].replace(/<br\s*\/?>/gi, " ");
+    title = title.replace(/<[^>]*>?/gm, "");
+    title = title.replace(/[#*`_]/g, "");
+    title = title.replace(/\r?\n/g, "").trim();
+    if (title) {
+        console.log(title);
+        process.exit(0);
+    }
+  }
+} catch(e) {}
+console.log(process.argv[2]);
+' "$INPUT_ABS" "$DEFAULT_PDF_TITLE")
+
 # 一時的な vivliostyle config を生成
 # entryはSCRIPT_DIR基点の相対パスで指定→styleのコピーもSCRIPT_DIR内に留まる
 TEMP_CONFIG="vivliostyle.tmp.config.js"
@@ -47,6 +69,7 @@ module.exports = {
   language: 'ja',
   size: 'A4',
   theme: './styles/style.css',
+  title: '${DOC_TITLE}',
   entry: [
     './${INPUT_REL}'
   ],
