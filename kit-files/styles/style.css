@@ -177,6 +177,7 @@ pre code {
     color: inherit;
     background-color: transparent;
     padding: 0;
+    margin: 0; /* ← 3/11追加, コードブロックの1行目がズレる現象を解消 */
 }
 
 /* インラインコード (単発) */
