@@ -90,22 +90,15 @@ h1 {
     font-size: 21pt;
     margin-top: 2em;
     margin-bottom: 1em;
-    break-before: page;
     border-bottom: 2px solid var(--accent-color);
     padding-bottom: 5px;
     color: #c93a37;
 }
 
-/* 最初のH1、またはタイトルの直後のH1は改ページしない */
-h1:first-of-type,
-.doc-subtitle+h1 {
-    break-before: auto;
-}
-
 h2 {
     font-size: 18pt;
     font-weight: 700;
-    margin-top: 2.5em;
+    margin-top: 2em;
     margin-bottom: 1em;
     border-left: 6px solid var(--accent-color);
     padding-left: 12px;
@@ -167,7 +160,8 @@ pre {
     border-radius: 4px;
     font-family: "Menlo", "Monaco", "Consolas", "Hiragino Sans", monospace;
     font-size: 8pt;
-    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
     break-inside: avoid;
     line-height: 1.5;
     margin: 1.5em 0;
@@ -177,7 +171,8 @@ pre code {
     color: inherit;
     background-color: transparent;
     padding: 0;
-    margin: 0; /* ← 3/11追加, コードブロックの1行目がズレる現象を解消 */
+    margin: 0;
+    /* ← 3/11追加, コードブロックの1行目がズレる現象を解消 */
 }
 
 /* インラインコード (単発) */

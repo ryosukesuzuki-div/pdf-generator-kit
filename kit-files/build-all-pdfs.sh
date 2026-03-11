@@ -12,9 +12,9 @@ TARGET_DIR="${1:-articles}"
 # 対象フォルダが存在するか確認
 if [ ! -d "$TARGET_DIR" ]; then
     echo "エラー: 指定されたフォルダが見つかりません -> $TARGET_DIR"
-    echo "使い方: npm run pdf:all [フォルダ名]"
+    echo "使い方: npm run pdf:all [フォルダのパス]"
     echo "例:     npm run pdf:all articles"
-    echo "例:     npm run pdf:all my-manuscripts"
+    echo "例:     npm run pdf:all my-folder/sub-folder"
     exit 1
 fi
 
