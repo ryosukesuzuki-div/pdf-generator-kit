@@ -1,4 +1,5 @@
 <div class="doc-header">pdf-generator-kit</div>
+<div class="doc-label">pdf-generator-kit</div>
 <div class="doc-title">PDF教材制作キットの使い方</div>
 <div class="doc-subtitle">Markdownからプロ仕様のPDFを出力するキット</div>
 

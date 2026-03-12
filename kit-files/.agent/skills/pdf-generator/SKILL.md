@@ -78,9 +78,16 @@ npm run pdf:all my-folder/sub-folder
 <div class="doc-header">セクション名やタイトル</div>
 ```
 
+**ラベル**（タイトル上に表示するタグ。カテゴリやシリーズ名などに。省略可）:
+
+```html
+<div class="doc-label">シリーズ名やカテゴリ</div>
+```
+
 **タイトル / サブタイトル**（文書冒頭に記述）:
 
 ```html
+<div class="doc-label">シリーズ名やカテゴリ</div>
 <div class="doc-title">メインタイトル</div>
 <div class="doc-subtitle">サブタイトル</div>
 ```
