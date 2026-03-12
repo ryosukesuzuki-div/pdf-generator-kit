@@ -111,4 +111,4 @@ echo "   # フォルダ内を一括PDF化（フォルダのパスを指定・省
 echo "   npm run pdf:all"
 echo "--------------------------------------------------"
 echo "[AIスキル] SKILL.md を $SKILL_BASE_DIR/skills/pdf-generator/ に配置しました"
-echo "※ AIへの相談時は「このプロジェクトの執筆ルールを教えて」などと伝えてください"
+echo "※ Markdown原稿の書き方はAIに聞けます。「原稿の書き方を教えて」などと話しかけてみてください"
