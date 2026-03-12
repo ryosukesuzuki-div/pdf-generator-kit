@@ -4,9 +4,12 @@
 # Node.js
 node_modules/
 
-# PDF生成の出力先（テスト時に生成されるが配布不要）
+# PDF生成の出力先
 dist/
 
 # Vivliostyle一時ファイル
 *.temp-vivliostyle-config.js
 .vivliostyle/
+
+# PDF教材制作キット（セットアップ済み）
+.pdf-generator-kit/

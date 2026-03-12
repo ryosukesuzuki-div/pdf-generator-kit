@@ -26,6 +26,26 @@ cp "$KIT_DIR/kit-files/vivliostyle.book.config.js" ./vivliostyle.book.config.js
 # サンプル原稿と画像フォルダを articles フォルダに展開
 cp -r "$KIT_DIR/kit-files/articles/" ./articles/
 
+# .gitignore の展開（既存ファイルがあれば不足分を追記、なければコピー）
+KIT_GITIGNORE="$KIT_DIR/.gitignore"
+if [ -f ./.gitignore ]; then
+    # 既存の .gitignore に、キット側のエントリで未記載のものだけ追記
+    ADDED=0
+    while IFS= read -r line; do
+        # コメント行・空行はスキップ
+        [[ -z "$line" || "$line" == \#* ]] && continue
+        if ! grep -qFx "$line" ./.gitignore; then
+            [ $ADDED -eq 0 ] && echo "" >> ./.gitignore && echo "# PDF教材制作キット" >> ./.gitignore
+            echo "$line" >> ./.gitignore
+            ADDED=1
+        fi
+    done < "$KIT_GITIGNORE"
+    [ $ADDED -eq 1 ] && echo "✔ 既存の .gitignore にキット用の除外設定を追記しました"
+else
+    cp "$KIT_GITIGNORE" ./.gitignore
+    echo "✔ .gitignore を配置しました"
+fi
+
 # 3. AIスキル定義（SKILL.md）の展開先を決定
 # 優先順位: .agent > .agents > .claude (いずれもなければ .agent を作成)
 SKILL_BASE_DIR=""
@@ -56,8 +76,9 @@ chmod +x build-single-pdf.sh build-all-pdfs.sh
 echo "ツールをダウンロードしています（しばらくお待ちください）"
 npm install
 
-# 7. キットフォルダの隠しフォルダ化
-# セットアップ完了後、このフォルダ自体を隠しフォルダにしてルートを整理します
+# 7. キットフォルダの整理
+# クローンで取得したキットの .git 履歴を除去し、隠しフォルダ化してルートを整理する
+rm -rf "$KIT_DIR/.git"
 if [[ "$(basename "$KIT_DIR")" == pdf-generator-kit* ]]; then
     if [ ! -d "$DEST_DIR/.pdf-generator-kit" ]; then
         echo ""
@@ -67,12 +88,9 @@ if [[ "$(basename "$KIT_DIR")" == pdf-generator-kit* ]]; then
     fi
 fi
 
-# 8. 展開先のGitリポジトリを初期化（キット由来の.gitを除去して新規init）
-# クローン時に付属してくるキット開発用の.gitを削除し、ユーザーのプロジェクトとして再初期化する
-if [ -d "$DEST_DIR/.git" ]; then
+# 8. Gitリポジトリの初期化（展開先が未初期化の場合のみ）
+if [ ! -d "$DEST_DIR/.git" ]; then
     echo ""
-    echo "Gitリポジトリを初期化しています（キット由来の履歴を除去）..."
-    rm -rf "$DEST_DIR/.git"
     git -C "$DEST_DIR" init -q
     echo "✔ Gitリポジトリを新規初期化しました"
 fi
