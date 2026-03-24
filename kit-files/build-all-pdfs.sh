@@ -25,7 +25,8 @@ echo "対象フォルダ: $TARGET_DIR"
 echo "PDFの一括出力を開始します..."
 
 # 対象フォルダ内のすべての .md ファイルを検索してループ処理
-find "$TARGET_DIR" -name "*.md" | sort | while read -r file; do
+find "$TARGET_DIR" -name "*.md" -not -path '*/_*' | sort | while read -r file; do
+
 
     filename=$(basename "$file" .md)
     OUTPUT_FILE="dist/pdf/${filename}.pdf"

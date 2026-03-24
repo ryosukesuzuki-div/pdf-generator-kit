@@ -286,6 +286,28 @@ img {
     padding-bottom: 5px;
 }
 
+/* ステップアップ課題ボックス */
+.stepup-box {
+    border: 2px solid #4a90d9;
+    padding: 15px 20px 10px 20px;
+    border-radius: 8px;
+    background-color: #eef4fb;
+    margin: 2em 0;
+    break-inside: avoid;
+    font-family: "Hiragino Sans", "Meiryo", sans-serif;
+    color: #333;
+}
+
+.stepup-title {
+    display: block;
+    font-weight: bold;
+    color: #4a90d9;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    border-bottom: 1px dashed #4a90d9;
+    padding-bottom: 5px;
+}
+
 /* =========================================
    特殊操作 (改ページなど)
    ========================================= */
